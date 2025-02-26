@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Addiction Classes</title>
+    <style>
+      /* Base styles */
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: rgb(249, 250, 251);
+        min-height: 100vh;
+      }
+
+      /* Header styles */
+      .header {
+        background-color: rgb(5, 150, 105);
+        color: white;
+      }
+
+      .nav {
+        background-color: rgb(4, 120, 87);
+        padding: 1rem;
+      }
+
+      .nav-container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.2s;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+      }
+
+      .nav-link:hover {
+        color: rgb(167, 243, 208);
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .nav-link svg {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+
+      /* Dropdown styles */
+      .dropdown {
+        position: relative;
+        z-index: 1;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: rgb(4, 120, 87);
+        min-width: 200px;
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-top: 0.5rem;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-content a {
+        color: white;
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        display: block;
+        transition: all 0.2s;
+      }
+
+      .dropdown-content a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: rgb(167, 243, 208);
+      }
+
+      /* Slider styles */
+      .slider-container {
+        position: relative;
+        max-width: 100%;
+        background: #000;
+        padding: 2rem 0;
+        margin: 2rem 0;
+      }
+
+      .slider {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 0 4rem;
+        scrollbar-width: none;
+      }
+
+      .slider::-webkit-scrollbar {
+        display: none;
+      }
+
+      .slider img {
+        width: 300px;
+        height: 200px;
+        border-radius: 8px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+      }
+
+      .slider img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        color: #ffffff;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+      }
+
+      .slider-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .prev { left: 1rem; }
+      .next { right: 1rem; }
+
+      /* Content sections */
+      .content {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-title {
+        color: #333;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+      }
+
+      /* Services grid */
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .service {
+        background: #f9f9f9;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .service:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Study material section */
+      .study-links {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 1.5rem;
+      }
+
+      .study-links a {
+        color: #4CAF50;
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        background: #f5f5f5;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      .study-links a:hover {
+        background: #4CAF50;
+        color: #ffffff;
+      }
+
+      /* Contact section */
+      .contact-info {
+        display: grid;
+        gap: 1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Footer */
+      footer {
+        background: #333;
+        color: #ffffff;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 4rem;
+      }
+
+      .header-content {
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      .logo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 4px solid #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .dropdown-content {
+          position: static;
+          width: 100%;
+          margin-top: 0;
+          box-shadow: none;
+        }
+
+        .slider img {
+          width: 250px;
+          height: 180px;
+        }
+
+        .services {
+          grid-template-columns: 1fr;
+        }
+
+        .content {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-content">
+        <img src="pages/logo.png" alt="Addiction Classes Logo" class="logo">
+        <h1>Welcome to Addiction Classes</h1>
+      </div>
+      <nav class="nav">
+        <div class="nav-container">
+          <div class="nav-links">
+            <a href="../index.html" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span><b>Home</b></span>
+            </a>
+            <a href="pages/services.html" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <span>Services</span>
+            </a>
+            <div class="dropdown">
+              <a href="pages/study.html" class="nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-6.45 2.5 2.5 0 0 1 1.96-4.85"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-6.45 2.5 2.5 0 0 0-1.96-4.85"/></svg>
+                <span>Study Material</span>
+              </a>
+              <div class="dropdown-content">
+                <a href="class/5th class.html">Class 5th</a>
+                <a href="class/6th class.html">Class 6th</a>
+                <a href="class/7th class.html">Class 7th</a>
+                <a href="class/8th class.html">Class 8th</a>
+                <a href="class/9th class.html">Class 9th</a>
+                <a href="class/10th class.html">Class 10th</a>
+              </div>
+            </div>
+            <a href="pages/contact.html" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Contact</span>
+            </a>
+            <a href="pages/about.html" class="nav-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- User Icon (Head and Shoulders) -->
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M6 21v-2a6 6 0 0 1 12 0v2"/>
+                
+                <!-- "i" for Information (About Us) -->
+                <circle cx="18" cy="18" r="3"/>
+                <path d="M18 16v2"/>
+              </svg>
+              <span>About us</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+      
+    </header>
+
+    <div class="slider-container">
+      <button class="slider-btn prev" onclick="scrollSlider(-1)">‹</button>
+      <div class="slider">
+        <img src="pages/image 1.jpg" alt="Education">
+        <img src="pages/image 2.jpg" alt="Learning">
+        <img src="pages/image 3.jpg" alt="Students">
+        <img src="pages/image 4.jpg" alt="Teaching">
+        <img src="pages/image 5.jpg" alt="Teaching">
+        <img src="pages/image 6.jpg" alt="Study">
+        <img src="pages/image 7.jpg" alt="Study">
+      </div>
+      <button class="slider-btn next" onclick="scrollSlider(1)">›</button>
+    </div>
+
+    <div id="about" class="content">
+      <h2 class="section-title">About Us</h2>
+      <p>Addiction Classes is dedicated to helping individuals overcome addiction and build a better future. We provide specialized programs and personal coaching to help people regain control of their lives through education and support.</p>
+    </div>
+
+    <div id="services" class="content">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services">
+        <div class="service">
+          <h3>One-on-One Coaching</h3>
+          <p>Personalized coaching sessions designed to address individual needs and goals, providing focused attention and customized strategies for success.</p>
+        </div>
+        <div class="service">
+          <h3>Group Therapy</h3>
+          <p>Supportive group sessions that foster shared experiences and motivation, creating a community of understanding and growth.</p>
+        </div>
+        <div class="service">
+          <h3>Recovery Programs</h3>
+          <p>Structured programs focused on long-term recovery and relapse prevention, with proven methodologies and continuous support.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="study-material" class="content">
+      <h2 class="section-title">Study Material</h2>
+      <p>Access our comprehensive collection of study materials designed to support your learning journey:</p>
+      <ul class="study-links">
+        <li><a href="https://drive.google.com/file/d/1DBPVS6y0TCVzWLGU4MhvC6g_UFTYB8DL/view?usp=drive_link" target="_blank">DPPs</a></li>
+        <li><a href="https://drive.google.com/file/d/1ZBbJqmCXfH1LBGXjMJFgfojo9FIfD11x/view?usp=drive_link" target="_blank">Mind Map</a></li>
+        <li><a href="https://drive.google.com/file/d/1NlptwfodbolpZOjnqjCGVdDqOTbLGhBz/view?usp=drive_link" target="_blank">Notes</a></li>
+      </ul>
+    </div>
+
+    <div id="contact" class="content">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-info">
+        <p>📧 Email: contact@addictionclasses.com</p>
+        <p>📱 Phone: +91 8817751179</p>
+        <p>📍 Address: Infront of NRI Global Discovery School, Near AIIMS gate no. 4, Bhopal</p>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Addiction Classes. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      function scrollSlider(direction) {
+        const slider = document.querySelector('.slider');
+        const scrollAmount = direction * 300;
+        slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    </script>
+  </body>
+</html>
